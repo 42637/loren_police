@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE066" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#997A15" />
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D32F2F" />
+      <stop offset="100%" stop-color="#800000" />
+    </linearGradient>
+    <linearGradient id="darkBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#222B36" />
+      <stop offset="100%" stop-color="#121820" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Dark Square Container Background -->
+  <rect x="2" y="2" width="96" height="96" rx="6" fill="url(#darkBg)" stroke="#2C3847" stroke-width="1.5" />
+
+  <!-- Crossed Rifles Behind Shield -->
+  <g stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round">
+    <!-- Left Rifle -->
+    <line x1="20" y1="20" x2="80" y2="80" />
+    <polygon points="18,18 24,18 22,22 16,22" fill="url(#goldGrad)" />
+    <!-- Right Rifle -->
+    <line x1="80" y1="20" x2="20" y2="80" />
+    <polygon points="82,18 76,18 78,22 84,22" fill="url(#goldGrad)" />
+  </g>
+
+  <!-- Outer Ornate Shield Rim -->
+  <path d="M50 15 C72 15 82 20 82 34 C82 62 65 80 50 87 C35 80 18 62 18 34 C18 20 28 15 50 15 Z" fill="none" stroke="url(#goldGrad)" stroke-width="3" filter="url(#shadow)" />
+  <path d="M50 18 C70 18 79 22 79 35 C79 60 63 77 50 84 C37 77 21 60 21 35 C21 22 30 18 50 18 Z" fill="#141C24" stroke="url(#goldGrad)" stroke-width="1" />
+
+  <!-- "ANDHRA PRADESH POLICE" Top Curved Text Arc -->
+  <path id="textArc" d="M 27 33 A 26 26 0 0 1 73 33" fill="none" />
+  <text font-size="5" font-weight="900" fill="#FFE066" fontFamily="sans-serif" letter-spacing="0.4">
+    <textPath href="#textArc" startOffset="50%" text-anchor="middle">ANDHRA PRADESH POLICE</textPath>
+  </text>
+
+  <!-- Laurel Wreath Leaves (Left & Right) -->
+  <g fill="url(#goldGrad)">
+    <path d="M 30 45 C 26 48 24 55 28 62 C 26 56 28 50 32 46 Z" />
+    <path d="M 70 45 C 74 48 76 55 72 62 C 74 56 72 50 68 46 Z" />
+  </g>
+
+  <!-- Center Circular Red Medallion -->
+  <circle cx="50" cy="50" r="15" fill="url(#redGrad)" stroke="url(#goldGrad)" stroke-width="1.8" filter="url(#shadow)" />
+  <circle cx="50" cy="50" r="13" fill="none" stroke="#FFE066" stroke-width="0.6" stroke-dasharray="1.5 1" />
+
+  <!-- Gold Ashoka Lion Emblem inside Center Medallion -->
+  <g fill="url(#goldGrad)" transform="translate(42, 40) scale(0.32)">
+    <!-- Lions Head -->
+    <path d="M25 2 C20 2 17 6 17 11 C17 16 20 18 25 18 C30 18 33 16 33 11 C33 6 30 2 25 2 Z" />
+    <path d="M14 6 C10 6 7 10 7 14 C7 18 10 20 15 20 C18 20 20 19 22 17 C19 14 19 9 14 6 Z" />
+    <path d="M36 6 C40 6 43 10 43 14 C43 18 40 20 35 20 C32 20 30 19 28 17 C31 14 31 9 36 6 Z" />
+    <!-- Abacus -->
+    <rect x="8" y="22" width="34" height="5" rx="1.5" />
+    <circle cx="25" cy="24.5" r="2" fill="#800000" />
+    <!-- Pedestal Base -->
+    <path d="M12 27 H38 L41 32 H9 L12 27 Z" />
+    <rect x="6" y="32" width="38" height="3" rx="1" />
+  </g>
+
+  <!-- Bottom Gold Ribbon Banner: DUTY HONOUR COMPASSION -->
+  <path d="M 30 73 Q 50 78 70 73 L 68 78 Q 50 83 32 78 Z" fill="url(#goldGrad)" />
+  <text x="50" y="76.5" font-size="3" font-weight="900" fill="#121820" fontFamily="sans-serif" text-anchor="middle" letter-spacing="0.5">SANYAMEVA JAYATE</text>
+</svg>

@@ -1,0 +1,34 @@
+# Node / frontend
+node_modules/
+dist/
+.vite/
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Android build artifacts
+*.apk
+*.aab
+android/.gradle/
+android/local.properties
+android/**/build/
+android/.idea/
+android/capacitor-cordova-android-plugins/build/
+
+
+# Python helper scripts / common caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Misc
+coverage/
+*.tmp

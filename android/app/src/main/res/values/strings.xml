@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">e-Challan Police Portal</string>
+    <string name="title_activity_main">e-Challan Police Portal</string>
+    <string name="package_name">com.echallan.police</string>
+    <string name="custom_url_scheme">com.echallan.police</string>
+</resources>
