@@ -32,8 +32,8 @@ export default function CameraDetailPage() {
 
   const mapMarkers = [
     {
-      top: '50%',
-      left: '50%',
+      lat: camera.lat || 16.5449,
+      lng: camera.lng || 81.5212,
       label: `${camera.id}: ${camera.name}`,
       type: 'camera'
     }
@@ -86,7 +86,13 @@ export default function CameraDetailPage() {
 
         <div className="card">
           <div className="form-section-title">CAMERA GEOGRAPHIC LOCATION</div>
-          <MockMap markers={mapMarkers} height="220px" />
+          <MockMap 
+            markers={mapMarkers} 
+            lat={camera.lat || 16.5449}
+            lng={camera.lng || 81.5212}
+            locationName={camera.location}
+            height="220px" 
+          />
         </div>
       </div>
 

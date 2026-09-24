@@ -24,11 +24,20 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Enable CORS for Vite frontend applications
+# Enable CORS for Vite frontend & Android Capacitor WebView applications
+allowed_origins = [
+    "https://localhost",
+    "http://localhost",
+    "http://localhost:5173",
+    "http://localhost:5180",
+    "capacitor://localhost",
+    "*"
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -359,4 +368,5 @@ def reject_complaint_api(action: ComplaintAction):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)
+    port = int(os.getenv("PORT", 8001))
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)

@@ -65,7 +65,8 @@ export default function AppHeader({ toggleSidebar, isSidebarOpen }) {
         {/* 24/7 Emergency Helpline Pill */}
         <a href="tel:1233" className="header-helpline-pill" title="Call Police Helpline 1233">
           <PhoneCall size={14} color="#F0C342" />
-          <span className="helpline-text">HELPLINE: <strong className="helpline-num">1233</strong></span>
+          <span className="helpline-text">HELPLINE: </span>
+          <strong className="helpline-num">1233</strong>
         </a>
 
         {user && (
@@ -96,18 +97,24 @@ export default function AppHeader({ toggleSidebar, isSidebarOpen }) {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0 20px;
+          padding: 0 16px;
           position: sticky;
           top: 0;
           z-index: 100;
           border-bottom: 2px solid #F0C342;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          width: 100%;
+          max-width: 100vw;
+          box-sizing: border-box;
+          overflow: hidden;
         }
 
         .header-brand {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 10px;
+          min-width: 0;
+          flex-shrink: 1;
         }
 
         /* 3 Dots Button Styling */
@@ -122,7 +129,7 @@ export default function AppHeader({ toggleSidebar, isSidebarOpen }) {
           border: 1px solid rgba(240, 195, 66, 0.4);
           cursor: pointer;
           transition: all 0.15s ease;
-          margin-right: 2px;
+          flex-shrink: 0;
         }
 
         .three-dots-btn:hover {
@@ -143,13 +150,18 @@ export default function AppHeader({ toggleSidebar, isSidebarOpen }) {
           display: flex;
           align-items: center;
           justify-content: center;
+          flex-shrink: 0;
         }
 
         .header-emblem-img {
-          height: 40px;
+          height: 38px;
           width: auto;
           object-fit: contain;
           filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+        }
+
+        .brand-titles {
+          min-width: 0;
         }
 
         .brand-name {
@@ -158,6 +170,9 @@ export default function AppHeader({ toggleSidebar, isSidebarOpen }) {
           letter-spacing: 0.5px;
           line-height: 1.1;
           color: #F0C342;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .brand-sub {
@@ -166,12 +181,16 @@ export default function AppHeader({ toggleSidebar, isSidebarOpen }) {
           font-weight: 600;
           letter-spacing: 0.4px;
           margin-top: 1px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .header-actions {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 10px;
+          flex-shrink: 0;
         }
 
         .header-datetime-pill {
@@ -180,13 +199,14 @@ export default function AppHeader({ toggleSidebar, isSidebarOpen }) {
           gap: 6px;
           background: rgba(255, 255, 255, 0.08);
           border: 1px solid rgba(240, 195, 66, 0.4);
-          padding: 5px 12px;
+          padding: 5px 10px;
           border-radius: 4px;
           color: #FFFFFF;
           font-size: 0.78rem;
           font-weight: 700;
           letter-spacing: 0.3px;
           box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+          white-space: nowrap;
         }
 
         .live-date-val {
@@ -207,10 +227,10 @@ export default function AppHeader({ toggleSidebar, isSidebarOpen }) {
         .header-helpline-pill {
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 5px;
           background: rgba(240, 195, 66, 0.15);
           border: 1px solid #F0C342;
-          padding: 5px 12px;
+          padding: 5px 10px;
           border-radius: 4px;
           color: #FFFFFF;
           text-decoration: none;
@@ -218,6 +238,7 @@ export default function AppHeader({ toggleSidebar, isSidebarOpen }) {
           font-weight: 700;
           transition: all 0.15s ease;
           box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+          white-space: nowrap;
         }
 
         .header-helpline-pill:hover {
@@ -241,17 +262,17 @@ export default function AppHeader({ toggleSidebar, isSidebarOpen }) {
           color: #F0C342;
           font-size: 0.88rem;
           font-weight: 900;
-          margin-left: 2px;
         }
 
         .header-officer-pill {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 8px;
           background: rgba(255, 255, 255, 0.08);
           border: 1px solid rgba(240, 195, 66, 0.35);
-          padding: 5px 12px;
+          padding: 4px 10px;
           border-radius: 4px;
+          white-space: nowrap;
         }
 
         .flag-badge-box {
@@ -266,14 +287,14 @@ export default function AppHeader({ toggleSidebar, isSidebarOpen }) {
         }
 
         .officer-name {
-          font-size: 0.85rem;
+          font-size: 0.82rem;
           font-weight: 800;
           line-height: 1.2;
           color: #FFFFFF;
         }
 
         .officer-dept {
-          font-size: 0.68rem;
+          font-size: 0.65rem;
           color: #D5E5F2;
         }
 
@@ -295,18 +316,64 @@ export default function AppHeader({ toggleSidebar, isSidebarOpen }) {
           justify-content: center;
         }
 
-        @media (max-width: 600px) {
-          .brand-name {
-            font-size: 0.85rem;
-          }
-          .brand-sub {
-            display: none;
-          }
+        /* Responsive Breakpoints for Mobile Viewport */
+        @media (max-width: 900px) {
           .header-officer-text {
             display: none;
           }
           .live-date-val, .live-time-sep {
             display: none;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .top-app-header {
+            padding: 0 10px;
+          }
+          .brand-sub {
+            display: none;
+          }
+          .header-datetime-pill {
+            display: none;
+          }
+        }
+
+        @media (max-width: 560px) {
+          .brand-name {
+            font-size: 0.82rem;
+            max-width: 140px;
+          }
+          .header-emblem-img {
+            height: 30px;
+          }
+          .three-dots-btn {
+            width: 32px;
+            height: 32px;
+          }
+          .helpline-text {
+            display: none;
+          }
+          .header-helpline-pill {
+            padding: 4px 8px;
+          }
+          .header-officer-pill {
+            padding: 3px 6px;
+            gap: 4px;
+            background: transparent;
+            border: none;
+          }
+          .header-actions {
+            gap: 6px;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .flag-badge-box {
+            display: none;
+          }
+          .brand-name {
+            font-size: 0.76rem;
+            max-width: 115px;
           }
         }
       `}</style>

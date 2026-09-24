@@ -1,8 +1,6 @@
-// src/services/policeChallanService.js
+import { FASTAPI_BASE_URL } from '../config/apiConfig';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { initialChallanCases } from '../data/caseData';
-
-const FASTAPI_BASE_URL = (import.meta.env.VITE_FASTAPI_URL || 'http://localhost:8000').replace(/\/$/, '');
 
 /**
  * Fetch ONLY disputed complaints & under-review fines from Supabase dataset
@@ -218,3 +216,59 @@ export async function rejectChallanInSupabaseDB(id, reason, remarks = '', challa
     console.warn('[Supabase Reject Exception]:', e);
   }
 }
+
+/**
+ * Fetch Camera Vehicle Detections live from Supabase
+ */
+export async function fetchDetectionsFromSupabase(fallbackDetections = []) {
+  if (!isSupabaseConfigured) {
+    return fallbackDetections;
+  }
+
+  try {
+    const { data: finedData, error } = await supabase
+      .from('fined_data')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error || !finedData || finedData.length === 0) {
+      return fallbackDetections;
+    }
+
+    const mapped = finedData.map((row, index) => {
+      const vehNo = row.vehicle_number || row.vehicle_no || 'AP37AB4567';
+      const statusRaw = (row.status || '').toUpperCase();
+      let status = 'NORMAL';
+      if (statusRaw.includes('MATCH') || statusRaw.includes('REVIEW') || statusRaw.includes('STOLEN') || statusRaw.includes('POTENTIAL')) {
+        status = 'POTENTIAL MATCH';
+      } else if (statusRaw.includes('PENDING')) {
+        status = 'REVIEW REQUIRED';
+      }
+
+      return {
+        id: row.detection_id || `DET-2026-${String(row.id || index + 400).padStart(5, '0')}`,
+        vehicleNo: vehNo,
+        cameraId: row.camera_id || `CAM${102 + (index % 5)}`,
+        cameraName: row.camera_name || 'Main Road Traffic Camera',
+        location: row.location_name || row.location || 'Main Road, Bhimavaram',
+        timestamp: row.created_at ? new Date(row.created_at).toLocaleString('en-IN') : '21 Aug 2026, 10:32 AM',
+        ocrConfidence: row.ocr_confidence || (90 + (index % 10)),
+        status: status,
+        matchedStolenId: status === 'POTENTIAL MATCH' ? 'STN-2026-008' : null,
+        stolenVehicleNo: status === 'POTENTIAL MATCH' ? vehNo : null,
+        matchedModel: row.vehicle_details || 'Hyundai Creta (White)',
+        verificationStatus: row.verification_status || (status === 'POTENTIAL MATCH' ? 'OFFICER VERIFICATION REQUIRED' : 'VERIFIED CLEAR'),
+        cameraLat: parseFloat(row.latitude) || (16.5449 + (index * 0.002)),
+        cameraLng: parseFloat(row.longitude) || (81.5212 + (index * 0.003)),
+        imageUrl: row.image_url || row.camera_image_url || null,
+        imagePlaceholder: row.image_url || row.camera_image_url || null
+      };
+    });
+
+    return mapped.length > 0 ? mapped : fallbackDetections;
+  } catch (err) {
+    console.warn('[Supabase Detections Fetch Error]:', err);
+    return fallbackDetections;
+  }
+}
+

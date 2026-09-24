@@ -1,5 +1,13 @@
 {
   "appId": "com.echallan.police",
   "appName": "e-Challan Police Portal",
-  "webDir": "dist"
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true
+  }
 }

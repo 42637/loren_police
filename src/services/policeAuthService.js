@@ -1,7 +1,5 @@
-// src/services/policeAuthService.js
+import { FASTAPI_BASE_URL } from '../config/apiConfig';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
-
-const FASTAPI_BASE_URL = (import.meta.env.VITE_FASTAPI_URL || 'http://localhost:8000').replace(/\/$/, '');
 
 /**
  * Sign In Police Officer via FastAPI Backend, Supabase, or Local Storage

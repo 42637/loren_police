@@ -340,12 +340,27 @@ export default function LoginPage() {
           align-items: center;
           justify-content: space-between;
           gap: 8px;
+          flex-wrap: wrap;
           background: rgba(0, 0, 0, 0.28);
           backdrop-filter: blur(8px);
           padding: 6px 12px;
           border-radius: 14px;
           border: 1px solid rgba(240, 195, 66, 0.25);
           margin-bottom: 8px;
+        }
+
+        @media (max-width: 480px) {
+          .ap-top-status-bar {
+            justify-content: center;
+            gap: 6px;
+            padding: 6px 8px;
+          }
+          .ap-card-body-padding {
+            padding: 14px 12px;
+          }
+          .ap-header-title-main {
+            font-size: 1.15rem;
+          }
         }
 
         .ap-status-clock-box {

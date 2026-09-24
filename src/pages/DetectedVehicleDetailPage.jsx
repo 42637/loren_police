@@ -45,8 +45,8 @@ export default function DetectedVehicleDetailPage() {
 
   const mapMarkers = [
     {
-      top: '45%',
-      left: '50%',
+      lat: detection.cameraLat || 16.5449,
+      lng: detection.cameraLng || 81.5212,
       label: `${detection.cameraId}: ${detection.vehicleNo}`,
       type: isPotentialMatch ? 'stolen' : 'camera'
     }
@@ -162,7 +162,13 @@ export default function DetectedVehicleDetailPage() {
 
         <div className="card">
           <div className="form-section-title">DETECTION LOCATION MAP</div>
-          <MockMap markers={mapMarkers} height="200px" />
+          <MockMap 
+            markers={mapMarkers} 
+            lat={detection.cameraLat || 16.5449}
+            lng={detection.cameraLng || 81.5212}
+            locationName={detection.location}
+            height="220px" 
+          />
         </div>
       </div>
 

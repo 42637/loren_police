@@ -6,6 +6,7 @@ import { initialCameras } from '../data/cameraData';
 import { initialNotifications } from '../data/notificationData';
 import { 
   fetchDisputedChallansFromSupabase, 
+  fetchDetectionsFromSupabase,
   verifyChallanInSupabaseDB, 
   rejectChallanInSupabaseDB 
 } from '../services/policeChallanService';
@@ -55,17 +56,21 @@ export function AppProvider({ children }) {
   const [notifications, setNotifications] = useState(initialNotifications);
   const [activities, setActivities] = useState(initialActivities);
 
-  // Load Disputed Complaints from Supabase
-  const refreshDisputedChallans = async () => {
-    const liveData = await fetchDisputedChallansFromSupabase();
-    if (Array.isArray(liveData)) {
-      setChallans(liveData);
+  // Load Disputed Complaints & Detections from Supabase
+  const refreshSupabaseData = async () => {
+    const liveChallans = await fetchDisputedChallansFromSupabase();
+    if (Array.isArray(liveChallans) && liveChallans.length > 0) {
+      setChallans(liveChallans);
+    }
+    const liveDetections = await fetchDetectionsFromSupabase(initialDetections);
+    if (Array.isArray(liveDetections) && liveDetections.length > 0) {
+      setDetections(liveDetections);
     }
   };
 
   useEffect(() => {
-    refreshDisputedChallans();
-    const interval = setInterval(refreshDisputedChallans, 3000); // Live sync every 3 seconds from Supabase
+    refreshSupabaseData();
+    const interval = setInterval(refreshSupabaseData, 3000); // Live sync every 3 seconds from Supabase
     return () => clearInterval(interval);
   }, []);
 

@@ -306,6 +306,11 @@ export default function RegisterStolenPage() {
         .register-form-card {
           padding: 24px;
         }
+        @media (max-width: 480px) {
+          .register-form-card {
+            padding: 16px 12px;
+          }
+        }
       `}</style>
     </div>
   );

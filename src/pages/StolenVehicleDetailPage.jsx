@@ -28,8 +28,8 @@ export default function StolenVehicleDetailPage() {
 
   const mapMarkers = [
     {
-      top: '40%',
-      left: '50%',
+      lat: 16.5480,
+      lng: 81.5300,
       label: `LAST KNOWN: ${vehicle.registrationNo}`,
       type: 'stolen'
     }
@@ -92,7 +92,13 @@ export default function StolenVehicleDetailPage() {
       {/* MAP & LAST LOCATION */}
       <div className="card">
         <div className="form-section-title">LAST KNOWN LOCATION & MAP</div>
-        <MockMap markers={mapMarkers} height="220px" />
+        <MockMap 
+          markers={mapMarkers} 
+          lat={16.5480}
+          lng={81.5300}
+          locationName={vehicle.lastKnownLocation}
+          height="220px" 
+        />
         <div style={{ marginTop: '12px' }}>
           <DetailRow label="Last Reported Spot" value={vehicle.lastKnownLocation} highlight={true} />
         </div>
