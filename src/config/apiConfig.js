@@ -1,7 +1,7 @@
 // Centralized Production API & Supabase Configuration for Police Control Room
 export const FASTAPI_BASE_URL = (
   import.meta.env.VITE_FASTAPI_URL || 
-  'https://police-portal-backend.onrender.com'
+  'https://loren-police.onrender.com'
 ).replace(/\/$/, '');
 
 export const SUPABASE_URL = (
