@@ -49,18 +49,20 @@ const initialActivities = [
 ];
 
 export function AppProvider({ children }) {
-  const [challans, setChallans] = useState([]);
+  const [challans, setChallans] = useState(initialChallanCases);
   const [stolenVehicles, setStolenVehicles] = useState(initialStolenVehicles);
   const [detections, setDetections] = useState(initialDetections);
   const [cameras] = useState(initialCameras);
   const [notifications, setNotifications] = useState(initialNotifications);
   const [activities, setActivities] = useState(initialActivities);
 
-  // Load Disputed Complaints & Detections from Supabase
+  // Load Disputed Complaints & Detections from Supabase / Backend with Fallback
   const refreshSupabaseData = async () => {
     const liveChallans = await fetchDisputedChallansFromSupabase();
     if (Array.isArray(liveChallans) && liveChallans.length > 0) {
       setChallans(liveChallans);
+    } else {
+      setChallans((prev) => (prev.length > 0 ? prev : initialChallanCases));
     }
     const liveDetections = await fetchDetectionsFromSupabase(initialDetections);
     if (Array.isArray(liveDetections) && liveDetections.length > 0) {
